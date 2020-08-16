@@ -1,0 +1,71 @@
+<?php
+
+include "connection.php";
+
+  session_start();
+   // $lid= $_SESSION['custlog'];
+   $cid="CUST_3";
+
+  $itemid= $_POST['item_id'];
+  $itno= $_POST['itno'];
+  
+   if (isset ($itemid)){
+     $s3="SELECT * FROM  item_details where item_id='$itemid'";
+     $q3 = mysqli_query($connection, $s3) or die("Record not found..."); 
+     $r3=mysqli_fetch_row($q3);
+      
+     $itname=$r3[1];
+     $itdetail=$r3[2];
+     $itprice=$r3[3];;
+     $qty=$r3[4];
+     $s12="SELECT * FROM  customer where c_id='$cid'";
+     $q = mysqli_query($connection, $s12) or die("Record not found..."); 
+     $r=mysqli_fetch_row($q);
+     $nm=$r[2];
+     $addr=$r[3];
+     $phno=$r[4];
+    
+   
+  if($itno<=$qty) {
+
+     
+
+    $qty=$qty - $itno;
+    /*$q112="update item_details set  no_of_qty='$qty' where item_id='$itemid' ";
+    $results = mysqli_query($q112, $link) or die("Error.........."); */
+
+     $total=$itno*$itprice;
+     echo $itemid." ".$itno.  "  ".$qty.  "  ".$itname.  "  ".$itdetail.  "  ".$itprice.  "  ".$nm.  "  ".$addr.  "  ".$phno."     ".$total;
+    }
+}
+		
+				
+   // header("location:item_display.php");
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ /*if (isset ($itemid)){
+  if($itemno<=$qty) {
+    $qty=$qty - $itemno;
+    $q112="update item_details set  no_of_qty='$qty' where item_id='$itemid' ";
+    $results = mysqli_query($connection, $q112) or die("Error.........."); 
+
+    }
+}
+		
+				
+    header("location:item_display.php");
+
+*/
+  
+
+     
+
+ ?>
